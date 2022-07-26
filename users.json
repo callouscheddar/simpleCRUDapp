@@ -66,5 +66,13 @@
     "website": "",
     "id": 1879571,
     "extension": "jpg"
+  },
+  {
+    "id": 8,
+    "name": "Johnny",
+    "username": "j1123",
+    "email": "jbob@gmail.com",
+    "phone": 123,
+    "website": "awesome.com"
   }
 ]
