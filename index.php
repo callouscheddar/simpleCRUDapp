@@ -1,22 +1,15 @@
 <?php
+include 'includes/header.php';
 include __DIR__ . '/users.php';
 ?>
 
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <title>Basic Crud App</title>
-</head>
-<body>
-<h1>Users</h1>
-<table class="table">
-    <thead>
+<div class="container border rounded-top mt-5 p-0 overflow-auto">
+    <div class="border-bottom rounded-top p-3 bg-dark bg-opacity-25 d-flex justify-content-between align-items-center">
+        <h1>Users</h1>
+        <a href="create.php" class="btn btn-success">Create User</a>
+    </div>
+    <table class="table pb-0 m-0">
+        <thead>
         <tr>
             <td>Id</td>
             <td>Name</td>
@@ -24,10 +17,12 @@ include __DIR__ . '/users.php';
             <td>Email</td>
             <td>Phone</td>
             <td>Website</td>
+            <td>Update</td>
+            <td>Delete</td>
         </tr>
-    </thead>
-    <tbody>
-        <?php foreach(allUsers() as $user): ?>
+        </thead>
+        <tbody>
+        <?php foreach (allUsers() as $user): ?>
             <tr>
                 <td><?= $user['id'] ?></td>
                 <td><?= $user['name'] ?></td>
@@ -35,9 +30,12 @@ include __DIR__ . '/users.php';
                 <td><?= $user['email'] ?></td>
                 <td><?= $user['phone'] ?></td>
                 <td><?= $user['website'] ?></td>
+                <td><a class="btn btn-success p-1" href="update.php?id=<?= $user['id'] ?>">Update</a></td>
+                <td><a class="btn btn-success p-1" href="delete.php?id=<?= $user['id'] ?>">Delete</a></td>
             </tr>
         <?php endforeach ?>
-    </tbody>
-</table>
-</body>
-</html>
+        </tbody>
+    </table>
+</div>
+
+<?php include 'includes/footer.php' ?>
