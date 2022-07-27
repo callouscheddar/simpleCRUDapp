@@ -6,6 +6,7 @@ include __DIR__ . '/users.php';
 session_start();
 
 // get id from get, or the sess
+// (create and assign id to sess, so we don't lost it on form submission)
 if (isset($_GET['id'])) {
     $_SESSION['id'] = $_GET['id'];
     $id = $_GET['id'];
@@ -13,7 +14,9 @@ if (isset($_GET['id'])) {
     $id = $_SESSION['id'];
 }
 
+// get data from that user to display on page
 $data = findUser($id);
+
 if (isset($_POST['submit'])) {
     $data['name'] = $_POST['name'];
     $data['username'] = $_POST['username'];
@@ -25,8 +28,8 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
-<div class="container border rounded-3 mt-5 p-0 col-md-4">
-    <h1 class="border-bottom rounded-top p-3 bg-dark bg-opacity-25 text-secondary">Edit User:</h1>
+<div class="container border rounded-3 mt-5 p-0 col-md-4 bg-secondary bg-opacity-25">
+    <h1 class="border-bottom rounded-top p-3 bg-primary bg-opacity-50 text-white">Edit User:</h1>
     <?php if (isset($result) && !$result): ?>
         <p class="text-center text-danger">There was an error with your submission.</p>
     <?php endif ?>

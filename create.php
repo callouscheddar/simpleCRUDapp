@@ -12,8 +12,8 @@ if (isset($_POST['submit'])) {
     createUser($data);
 }
 ?>
-<div class="container border rounded-3 mt-5 p-0 col-md-4">
-    <h1 class="border-bottom rounded-top p-3 bg-dark bg-opacity-25 text-secondary">Update User:</h1>
+<div class="container border rounded-3 mt-5 p-0 col-md-4 bg-secondary bg-opacity-25">
+    <h1 class="border-bottom rounded-top p-3 bg-success bg-opacity-50 text-white">Update User:</h1>
     <form class="p-3 m-0 d-flex flex-column gap-4" method="POST" action="create.php">
         <input class="form-control" type="text" name="name" placeholder="Name">
         <input class="form-control" type="text" name="username" placeholder="Username">

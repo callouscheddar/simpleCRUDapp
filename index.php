@@ -3,15 +3,14 @@ include 'includes/header.php';
 include __DIR__ . '/users.php';
 ?>
 
-<div class="container border rounded-top mt-5 p-0 overflow-auto">
-    <div class="border-bottom rounded-top p-3 bg-dark bg-opacity-25 d-flex justify-content-between align-items-center">
-        <h1>Users</h1>
+<div class="container border rounded-top mt-5 p-0 overflow-auto bg-secondary bg-opacity-25">
+    <div class="border-bottom rounded-top p-3 bg-success bg-opacity-25 d-flex justify-content-between align-items-center">
+        <h1 class="text-secondary">Users</h1>
         <a href="create.php" class="btn btn-success">Create User</a>
     </div>
-    <table class="table pb-0 m-0">
+    <table class="table pb-0 m-0 bg-light table-hover">
         <thead>
         <tr>
-            <td>Id</td>
             <td>Name</td>
             <td>Username</td>
             <td>Email</td>
@@ -24,7 +23,6 @@ include __DIR__ . '/users.php';
         <tbody>
         <?php foreach (allUsers() as $user): ?>
             <tr>
-                <td><?= $user['id'] ?></td>
                 <td><?= $user['name'] ?></td>
                 <td><?= $user['username'] ?></td>
                 <td><?= $user['email'] ?></td>

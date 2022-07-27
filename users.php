@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * The users.php file handles the CRUD operations of this
+ * application.
+ */
+
 function allUsers()
 {
     return json_decode(file_get_contents(__DIR__ . '/users.json'), true);
@@ -18,12 +23,8 @@ function findUser($id): array
 
 function createUser($data): void
 {
-    // empty validation
-    if (empty($data['name']) || empty($data['username']) || empty($data['email'])
-        || empty($data['phone']) || empty($data['website'])) {
-        echo 'Failed';
-        return;
-    }
+    // validate data
+    $data = validateData($data);
 
     $users = allUsers();
 
@@ -34,7 +35,7 @@ function createUser($data): void
 
     // generate unique user id
     $new_user_id = 4;
-    while (in_array($new_user_id, $user_id_list))  {
+    while (in_array($new_user_id, $user_id_list)) {
         $new_user_id = rand(1, 100000);
     }
 
@@ -48,13 +49,10 @@ function createUser($data): void
     exit();
 }
 
-function updateUser($id, $data) : mixed
+function updateUser($id, $data): mixed
 {
-    // empty validation
-    if (empty($data['name']) || empty($data['username']) || empty($data['email'])
-        || empty($data['phone']) || empty($data['website'])) {
-        return false;
-    }
+    // validate data
+    $data = validateData($data);
 
     $users = allUsers();
 
@@ -84,7 +82,36 @@ function updateUser($id, $data) : mixed
 
 }
 
-function deleteUser($id): void
+function deleteUser($id): mixed
 {
+    $users = allUsers();
 
+    // loop through users to find matching id, then with the index of that array
+    // that matches the id, unset that array. ex unset(array[0])
+    foreach ($users as $index => $data) {
+        if ($data['id'] == $id) {
+            unset($users[$index]);
+        }
+    }
+
+    // replace existing json with new json file
+    $result = file_put_contents(__DIR__ . '/users.json', json_encode($users));
+
+    // if successfull then return home, otherwise return false
+    if ($result) {
+        header("Location: index.php");
+        exit();
+    } else {
+        return false;
+    }
+}
+
+// This function will validate and sanitize the data
+function validateData($data) {
+    if (empty($data['name']) || empty($data['username']) || empty($data['email'])
+        || empty($data['phone']) || empty($data['website'])) {
+        return false;
+    }
+
+    return $data;
 }
